@@ -1,0 +1,340 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		A399B43D17AED01800ADF304 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A399B43C17AED01800ADF304 /* UIKit.framework */; };
+		A399B43F17AED01800ADF304 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A399B43E17AED01800ADF304 /* Foundation.framework */; };
+		A399B44117AED01800ADF304 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A399B44017AED01800ADF304 /* CoreGraphics.framework */; };
+		A399B44717AED01800ADF304 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = A399B44517AED01800ADF304 /* InfoPlist.strings */; };
+		A399B44917AED01800ADF304 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = A399B44817AED01800ADF304 /* main.m */; };
+		A399B44D17AED01800ADF304 /* KKAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = A399B44C17AED01800ADF304 /* KKAppDelegate.m */; };
+		A399B44F17AED01800ADF304 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B44E17AED01800ADF304 /* Default.png */; };
+		A399B45117AED01800ADF304 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B45017AED01800ADF304 /* Default@2x.png */; };
+		A399B45317AED01800ADF304 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B45217AED01800ADF304 /* Default-568h@2x.png */; };
+		A399B45617AED01800ADF304 /* KKViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = A399B45517AED01800ADF304 /* KKViewController.m */; };
+		A399B45917AED01800ADF304 /* KKViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = A399B45717AED01800ADF304 /* KKViewController.xib */; };
+		A399B46717AF507400ADF304 /* gesture_node_normal@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B46317AF507400ADF304 /* gesture_node_normal@2x.png */; };
+		A399B46817AF507400ADF304 /* gesture_node_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B46417AF507400ADF304 /* gesture_node_normal.png */; };
+		A399B46917AF507400ADF304 /* gesture_node_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B46517AF507400ADF304 /* gesture_node_selected@2x.png */; };
+		A399B46A17AF507400ADF304 /* gesture_node_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B46617AF507400ADF304 /* gesture_node_selected.png */; };
+		A399B46C17AF8FD300ADF304 /* gesture_background.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B46B17AF8FD300ADF304 /* gesture_background.png */; };
+		A399B47017AF997100ADF304 /* KKGestureLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = A399B46F17AF997100ADF304 /* KKGestureLockView.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		A399B43917AED01800ADF304 /* KKGestureLockView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKGestureLockView.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		A399B43C17AED01800ADF304 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		A399B43E17AED01800ADF304 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		A399B44017AED01800ADF304 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		A399B44417AED01800ADF304 /* KKGestureLockView-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KKGestureLockView-Info.plist"; sourceTree = "<group>"; };
+		A399B44617AED01800ADF304 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		A399B44817AED01800ADF304 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		A399B44A17AED01800ADF304 /* KKGestureLockView-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "KKGestureLockView-Prefix.pch"; sourceTree = "<group>"; };
+		A399B44B17AED01800ADF304 /* KKAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKAppDelegate.h; sourceTree = "<group>"; };
+		A399B44C17AED01800ADF304 /* KKAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKAppDelegate.m; sourceTree = "<group>"; };
+		A399B44E17AED01800ADF304 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
+		A399B45017AED01800ADF304 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		A399B45217AED01800ADF304 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		A399B45417AED01800ADF304 /* KKViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KKViewController.h; sourceTree = "<group>"; };
+		A399B45517AED01800ADF304 /* KKViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KKViewController.m; sourceTree = "<group>"; };
+		A399B45817AED01800ADF304 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/KKViewController.xib; sourceTree = "<group>"; };
+		A399B46317AF507400ADF304 /* gesture_node_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_normal@2x.png"; sourceTree = "<group>"; };
+		A399B46417AF507400ADF304 /* gesture_node_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gesture_node_normal.png; sourceTree = "<group>"; };
+		A399B46517AF507400ADF304 /* gesture_node_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_selected@2x.png"; sourceTree = "<group>"; };
+		A399B46617AF507400ADF304 /* gesture_node_selected.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gesture_node_selected.png; sourceTree = "<group>"; };
+		A399B46B17AF8FD300ADF304 /* gesture_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gesture_background.png; sourceTree = "<group>"; };
+		A399B46E17AF997100ADF304 /* KKGestureLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockView.h; sourceTree = "<group>"; };
+		A399B46F17AF997100ADF304 /* KKGestureLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKGestureLockView.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		A399B43617AED01800ADF304 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A399B43D17AED01800ADF304 /* UIKit.framework in Frameworks */,
+				A399B43F17AED01800ADF304 /* Foundation.framework in Frameworks */,
+				A399B44117AED01800ADF304 /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		A399B43017AED01800ADF304 = {
+			isa = PBXGroup;
+			children = (
+				A399B44217AED01800ADF304 /* KKGestureLockView */,
+				A399B43B17AED01800ADF304 /* Frameworks */,
+				A399B43A17AED01800ADF304 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		A399B43A17AED01800ADF304 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				A399B43917AED01800ADF304 /* KKGestureLockView.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		A399B43B17AED01800ADF304 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A399B43C17AED01800ADF304 /* UIKit.framework */,
+				A399B43E17AED01800ADF304 /* Foundation.framework */,
+				A399B44017AED01800ADF304 /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		A399B44217AED01800ADF304 /* KKGestureLockView */ = {
+			isa = PBXGroup;
+			children = (
+				A399B46D17AF997100ADF304 /* Source */,
+				A399B44B17AED01800ADF304 /* KKAppDelegate.h */,
+				A399B44C17AED01800ADF304 /* KKAppDelegate.m */,
+				A399B45417AED01800ADF304 /* KKViewController.h */,
+				A399B45517AED01800ADF304 /* KKViewController.m */,
+				A399B45717AED01800ADF304 /* KKViewController.xib */,
+				A399B44317AED01800ADF304 /* Supporting Files */,
+			);
+			path = KKGestureLockView;
+			sourceTree = "<group>";
+		};
+		A399B44317AED01800ADF304 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				A399B46B17AF8FD300ADF304 /* gesture_background.png */,
+				A399B46317AF507400ADF304 /* gesture_node_normal@2x.png */,
+				A399B46417AF507400ADF304 /* gesture_node_normal.png */,
+				A399B46517AF507400ADF304 /* gesture_node_selected@2x.png */,
+				A399B46617AF507400ADF304 /* gesture_node_selected.png */,
+				A399B44417AED01800ADF304 /* KKGestureLockView-Info.plist */,
+				A399B44517AED01800ADF304 /* InfoPlist.strings */,
+				A399B44817AED01800ADF304 /* main.m */,
+				A399B44A17AED01800ADF304 /* KKGestureLockView-Prefix.pch */,
+				A399B44E17AED01800ADF304 /* Default.png */,
+				A399B45017AED01800ADF304 /* Default@2x.png */,
+				A399B45217AED01800ADF304 /* Default-568h@2x.png */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		A399B46D17AF997100ADF304 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				A399B46E17AF997100ADF304 /* KKGestureLockView.h */,
+				A399B46F17AF997100ADF304 /* KKGestureLockView.m */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		A399B43817AED01800ADF304 /* KKGestureLockView */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A399B45C17AED01800ADF304 /* Build configuration list for PBXNativeTarget "KKGestureLockView" */;
+			buildPhases = (
+				A399B43517AED01800ADF304 /* Sources */,
+				A399B43617AED01800ADF304 /* Frameworks */,
+				A399B43717AED01800ADF304 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KKGestureLockView;
+			productName = KKGestureLockView;
+			productReference = A399B43917AED01800ADF304 /* KKGestureLockView.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		A399B43117AED01800ADF304 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = KK;
+				LastUpgradeCheck = 0460;
+				ORGANIZATIONNAME = geeklu;
+			};
+			buildConfigurationList = A399B43417AED01800ADF304 /* Build configuration list for PBXProject "KKGestureLockView" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = A399B43017AED01800ADF304;
+			productRefGroup = A399B43A17AED01800ADF304 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				A399B43817AED01800ADF304 /* KKGestureLockView */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		A399B43717AED01800ADF304 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A399B44717AED01800ADF304 /* InfoPlist.strings in Resources */,
+				A399B44F17AED01800ADF304 /* Default.png in Resources */,
+				A399B45117AED01800ADF304 /* Default@2x.png in Resources */,
+				A399B45317AED01800ADF304 /* Default-568h@2x.png in Resources */,
+				A399B45917AED01800ADF304 /* KKViewController.xib in Resources */,
+				A399B46717AF507400ADF304 /* gesture_node_normal@2x.png in Resources */,
+				A399B46817AF507400ADF304 /* gesture_node_normal.png in Resources */,
+				A399B46917AF507400ADF304 /* gesture_node_selected@2x.png in Resources */,
+				A399B46A17AF507400ADF304 /* gesture_node_selected.png in Resources */,
+				A399B46C17AF8FD300ADF304 /* gesture_background.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		A399B43517AED01800ADF304 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				A399B44917AED01800ADF304 /* main.m in Sources */,
+				A399B44D17AED01800ADF304 /* KKAppDelegate.m in Sources */,
+				A399B45617AED01800ADF304 /* KKViewController.m in Sources */,
+				A399B47017AF997100ADF304 /* KKGestureLockView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		A399B44517AED01800ADF304 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A399B44617AED01800ADF304 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		A399B45717AED01800ADF304 /* KKViewController.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				A399B45817AED01800ADF304 /* en */,
+			);
+			name = KKViewController.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		A399B45A17AED01800ADF304 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		A399B45B17AED01800ADF304 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		A399B45D17AED01800ADF304 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KKGestureLockView/KKGestureLockView-Prefix.pch";
+				INFOPLIST_FILE = "KKGestureLockView/KKGestureLockView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		A399B45E17AED01800ADF304 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "KKGestureLockView/KKGestureLockView-Prefix.pch";
+				INFOPLIST_FILE = "KKGestureLockView/KKGestureLockView-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		A399B43417AED01800ADF304 /* Build configuration list for PBXProject "KKGestureLockView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A399B45A17AED01800ADF304 /* Debug */,
+				A399B45B17AED01800ADF304 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A399B45C17AED01800ADF304 /* Build configuration list for PBXNativeTarget "KKGestureLockView" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A399B45D17AED01800ADF304 /* Debug */,
+				A399B45E17AED01800ADF304 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = A399B43117AED01800ADF304 /* Project object */;
+}
