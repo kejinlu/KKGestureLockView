@@ -12,7 +12,7 @@ KKGestureLockView是一个非常方便使用的Gesture Lock控件，只需要简
 
 
 ##用法
-控件的源码在`KKGestureLockView/Source`目录下,且自带了一个仿支付宝解锁界面的例子:
+控件的源码在`KKGestureLockView/Source`目录下,且自带了一个仿支付宝解锁界面的例子（例子的图片资源取自支付宝app解压缩后的资源图片）:
 
     self.lockView.normalGestureNodeImage = [UIImage imageNamed:@"gesture_node_normal.png"];
     self.lockView.selectedGestureNodeImage = [UIImage imageNamed:@"gesture_node_selected.png"];
