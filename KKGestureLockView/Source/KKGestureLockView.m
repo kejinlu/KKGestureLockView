@@ -217,7 +217,6 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
         
         if (self.buttons != nil && [self.buttons count] > 0) {
             for (UIButton *button in self.buttons) {
-                button.backgroundColor = [UIColor clearColor];
                 [button setImage:normalGestureNodeImage forState:UIControlStateNormal];
             }
         }
@@ -235,7 +234,6 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
         
         if (self.buttons != nil && [self.buttons count] > 0) {
             for (UIButton *button in self.buttons) {
-                button.backgroundColor = [UIColor clearColor];
                 [button setImage:selectedGestureNodeImage forState:UIControlStateSelected];
             }
         }
@@ -266,14 +264,12 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
             button.tag = i;
             button.userInteractionEnabled = NO;
             button.frame = CGRectMake(0, 0, self.buttonSize.width, self.buttonSize.height);
-            
+            button.backgroundColor = [UIColor clearColor];
             if (self.normalGestureNodeImage != nil) {
-                button.backgroundColor = [UIColor clearColor];
                 [button setImage:self.normalGestureNodeImage forState:UIControlStateNormal];
             }
             
             if (self.selectedGestureNodeImage != nil) {
-                button.backgroundColor = [UIColor clearColor];
                 [button setImage:self.selectedGestureNodeImage forState:UIControlStateSelected];
             }
             
