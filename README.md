@@ -24,4 +24,4 @@ KKGestureLockView是一个非常方便使用的Gesture Lock控件，只需要简
 <img  width="320" height="566" src="https://raw.github.com/kejinlu/KKGestureLockView/master/screenshot.png"/> 
 
 一般情况下9个节点便够用了，当然如果你想多弄些节点也不是不可以：
-<img  width="768" height="1024" src="https://raw.github.com/kejinlu/KKGestureLockView/master/screenshot2.png"/> 
+<img  width="384" height="512" src="https://raw.github.com/kejinlu/KKGestureLockView/master/screenshot2.png"/> 
