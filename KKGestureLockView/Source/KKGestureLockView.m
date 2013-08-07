@@ -39,6 +39,21 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
 
 #pragma mark -
 #pragma mark Private Methods
+
+- (UIImage *)imageWithColor:(UIColor *)color size:(CGSize)size{
+    CGRect rect = CGRectMake(0.0f, 0.0f, size.width, size.height);
+    UIGraphicsBeginImageContext(rect.size);
+    CGContextRef context = UIGraphicsGetCurrentContext();
+    
+    CGContextSetFillColorWithColor(context, [color CGColor]);
+    CGContextFillRect(context, rect);
+    
+    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return image;
+}
+
 - (UIButton *)_buttonContainsThePoint:(CGPoint)point{
     for (UIButton *button in self.buttons) {
         if (CGRectContainsPoint(button.frame, point)) {
@@ -60,10 +75,14 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     [self addSubview:self.contentView];
     
     self.buttonSize = CGSizeMake(kNodeDefaultWidth, kNodeDefaultHeight);
-    self.selectedButtons = [NSMutableArray array];
+    
+    self.normalGestureNodeImage = [self imageWithColor:[UIColor greenColor] size:self.buttonSize];
+    self.selectedGestureNodeImage = [self imageWithColor:[UIColor redColor] size:self.buttonSize];
     
     self.numberOfGestureNodes = kNumberOfNodes;
     self.gestureNodesPerRow = kNodesPerRow;
+    
+    self.selectedButtons = [NSMutableArray array];
     
     self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
 }
