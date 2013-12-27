@@ -24,6 +24,7 @@
 		A399B46A17AF507400ADF304 /* gesture_node_selected.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B46617AF507400ADF304 /* gesture_node_selected.png */; };
 		A399B46C17AF8FD300ADF304 /* gesture_background.png in Resources */ = {isa = PBXBuildFile; fileRef = A399B46B17AF8FD300ADF304 /* gesture_background.png */; };
 		A399B47017AF997100ADF304 /* KKGestureLockView.m in Sources */ = {isa = PBXBuildFile; fileRef = A399B46F17AF997100ADF304 /* KKGestureLockView.m */; };
+		CC657ADA186D9F2A0009C58E /* gesture_node_error@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = CC657AD9186D9F2A0009C58E /* gesture_node_error@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		A399B46B17AF8FD300ADF304 /* gesture_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = gesture_background.png; sourceTree = "<group>"; };
 		A399B46E17AF997100ADF304 /* KKGestureLockView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockView.h; sourceTree = "<group>"; };
 		A399B46F17AF997100ADF304 /* KKGestureLockView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKGestureLockView.m; sourceTree = "<group>"; };
+		CC657AD9186D9F2A0009C58E /* gesture_node_error@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gesture_node_error@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -110,6 +112,7 @@
 		A399B44317AED01800ADF304 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				CC657AD9186D9F2A0009C58E /* gesture_node_error@2x.png */,
 				A399B46B17AF8FD300ADF304 /* gesture_background.png */,
 				A399B46317AF507400ADF304 /* gesture_node_normal@2x.png */,
 				A399B46417AF507400ADF304 /* gesture_node_normal.png */,
@@ -191,6 +194,7 @@
 				A399B44F17AED01800ADF304 /* Default.png in Resources */,
 				A399B45117AED01800ADF304 /* Default@2x.png in Resources */,
 				A399B45317AED01800ADF304 /* Default-568h@2x.png in Resources */,
+				CC657ADA186D9F2A0009C58E /* gesture_node_error@2x.png in Resources */,
 				A399B45917AED01800ADF304 /* KKViewController.xib in Resources */,
 				A399B46717AF507400ADF304 /* gesture_node_normal@2x.png in Resources */,
 				A399B46817AF507400ADF304 /* gesture_node_normal.png in Resources */,
@@ -333,6 +337,7 @@
 				A399B45E17AED01800ADF304 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

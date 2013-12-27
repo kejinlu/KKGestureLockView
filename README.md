@@ -12,7 +12,7 @@ KKGestureLockView是一个非常方便使用的Gesture Lock控件，只需要简
 
 
 ##用法
-控件的源码在`KKGestureLockView/Source`目录下,且自带了一个仿支付宝解锁界面的例子（例子的图片资源取自支付宝app解压缩后的资源图片）:
+控件的源码在`KKGestureLockView/Source`目录下,且自带了一个仿支付宝解锁界面的简单例子（例子的图片资源取自支付宝app解压缩后的资源图片）:
 
     self.lockView.normalGestureNodeImage = [UIImage imageNamed:@"gesture_node_normal.png"];
     self.lockView.selectedGestureNodeImage = [UIImage imageNamed:@"gesture_node_selected.png"];
@@ -21,6 +21,11 @@ KKGestureLockView是一个非常方便使用的Gesture Lock控件，只需要简
     self.lockView.delegate = self;
     self.lockView.contentInsets = UIEdgeInsetsMake(150, 20, 100, 20);
     
+如果要自己控制绘制手势之后的节点的显示控制，比如, 如果手势错误需要将节点、节点间的线都变成红色，那么可以这样做(具体用法请参考KKViewController.m)里面的例子：
+
+    UIImage *selectedImage = [UIImage imageNamed:@"gesture_node_error"];
+    [self.lockView redrawOnlySelectionWithLineColor:[UIColor redColor] selectedImage:selectedImage];
+
 <img  width="320" height="566" src="https://raw.github.com/kejinlu/KKGestureLockView/master/screenshot.png"/> 
 
 一般情况下9个节点便够用了，当然如果你想多弄些节点也不是不可以：

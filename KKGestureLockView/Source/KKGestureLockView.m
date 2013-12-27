@@ -27,7 +27,6 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
 @property (nonatomic, strong) UIView *contentView;
 
 //Implement nodes with buttons
-@property (nonatomic, assign) CGSize buttonSize;
 @property (nonatomic, strong) NSArray *buttons;
 @property (nonatomic, strong) NSMutableArray *selectedButtons;
 
@@ -73,11 +72,13 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     self.contentView = [[UIView alloc] initWithFrame:UIEdgeInsetsInsetRect(self.bounds, self.contentInsets)];
     self.contentView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.contentView];
-    
-    self.buttonSize = CGSizeMake(kNodeDefaultWidth, kNodeDefaultHeight);
-    
-    self.normalGestureNodeImage = [self imageWithColor:[UIColor greenColor] size:self.buttonSize];
-    self.selectedGestureNodeImage = [self imageWithColor:[UIColor redColor] size:self.buttonSize];
+
+    if (CGSizeEqualToSize(self.nodeSize, CGSizeZero)) {
+        self.nodeSize = CGSizeMake(kNodeDefaultWidth, kNodeDefaultHeight);
+    }
+
+    self.normalGestureNodeImage = [self imageWithColor:[UIColor greenColor] size:self.nodeSize];
+    self.selectedGestureNodeImage = [self imageWithColor:[UIColor redColor] size:self.nodeSize];
     
     self.numberOfGestureNodes = kNumberOfNodes;
     self.gestureNodesPerRow = kNodesPerRow;
@@ -85,8 +86,17 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     self.selectedButtons = [NSMutableArray array];
     
     self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
+    self.autoResetSelectionState = YES;
 }
 
+- (NSString *)generatePassCode
+{
+    NSMutableArray *passCodeArray = [NSMutableArray array];
+    for (UIButton *button in self.selectedButtons) {
+        [passCodeArray addObject:[@(button.tag) stringValue]];
+    }
+    return [passCodeArray componentsJoinedByString:@","];
+}
 
 #pragma mark -
 #pragma mark UIView Overrides
@@ -110,15 +120,15 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     [super layoutSubviews];
     
     self.contentView.frame = UIEdgeInsetsInsetRect(self.bounds, self.contentInsets);
-    CGFloat horizontalNodeMargin = (self.contentView.bounds.size.width - self.buttonSize.width * self.gestureNodesPerRow)/(self.gestureNodesPerRow - 1);
+    CGFloat horizontalNodeMargin = (self.contentView.bounds.size.width - self.nodeSize.width * self.gestureNodesPerRow)/(self.gestureNodesPerRow - 1);
     NSUInteger numberOfRows = ceilf((self.numberOfGestureNodes * 1.0 / self.gestureNodesPerRow));
-    CGFloat verticalNodeMargin = (self.contentView.bounds.size.height - self.buttonSize.height *numberOfRows)/(numberOfRows - 1);
+    CGFloat verticalNodeMargin = (self.contentView.bounds.size.height - self.nodeSize.height *numberOfRows)/(numberOfRows - 1);
     
     for (int i = 0; i < self.numberOfGestureNodes ; i++) {
         int row = i / self.gestureNodesPerRow;
         int column = i % self.gestureNodesPerRow;
         UIButton *button = [self.buttons objectAtIndex:i];
-        button.frame = CGRectMake(floorf((self.buttonSize.width + horizontalNodeMargin) * column), floorf((self.buttonSize.height + verticalNodeMargin) * row), self.buttonSize.width, self.buttonSize.height);
+        button.frame = CGRectMake(floorf((self.nodeSize.width + horizontalNodeMargin) * column), floorf((self.nodeSize.height + verticalNodeMargin) * row), self.nodeSize.width, self.nodeSize.height);
     }
 }
 
@@ -185,42 +195,60 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{    
     if ([self.selectedButtons count] > 0) {
         if (_delegateFlags.didEndWithPasscode) {
-            NSMutableArray *passcodeArray = [NSMutableArray array];
-            for (UIButton *button in self.selectedButtons) {
-                [passcodeArray addObject:[NSString stringWithFormat:@"%d",button.tag]];
-            }
-            
-            [self.delegate gestureLockView:self didEndWithPasscode:[passcodeArray componentsJoinedByString:@","]];
+            [self.delegate gestureLockView:self didEndWithPasscode:[self generatePassCode]];
         }
     }
-    
+
+    if (self.autoResetSelectionState) {
+        [self resetSelectionState];
+    }
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+    if ([self.selectedButtons count] > 0) {
+        if (_delegateFlags.didCanceled) {
+            [self.delegate gestureLockView:self didCanceledWithPasscode:[self generatePassCode]];
+        }
+    }
+
+    if (self.autoResetSelectionState) {
+        [self resetSelectionState];
+    }
+}
+
+#pragma pulic methods
+- (void)resetSelectionState
+{
     for (UIButton *button in self.selectedButtons) {
         button.selected = NO;
     }
     [self.selectedButtons removeAllObjects];
     self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
     [self setNeedsDisplay];
-    
-
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-    if ([self.selectedButtons count] > 0) {
-        if (_delegateFlags.didCanceled) {
-            NSMutableArray *passcodeArray = [NSMutableArray array];
-            for (UIButton *button in self.selectedButtons) {
-                [passcodeArray addObject:[NSString stringWithFormat:@"%d",button.tag]];
-            }
-            
-            [self.delegate gestureLockView:self didCanceledWithPasscode:[passcodeArray componentsJoinedByString:@","]];
+- (void)redrawOnlySelectionWithLineColor:(UIColor *)lineColor selectedImage:(UIImage *)selectedImage
+{
+    self.lineColor = lineColor;
+    self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
+    [self setSelectedGestureNodeImage:selectedImage];
+    [self setNeedsDisplay];
+}
+
+- (void)drawSelectionWithPassCode:(NSString *)passCode
+{
+    NSArray *passCodeArray = [passCode componentsSeparatedByString:@","];
+    if (passCodeArray.count <= 0) return;
+    //clean state first
+    [self resetSelectionState];
+    for (NSString *passCodeUnit in passCodeArray) {
+        NSInteger buttonTag = [passCodeUnit integerValue];
+        if (buttonTag >= 0 && buttonTag < self.buttons.count) {
+            UIButton *button = self.buttons[buttonTag];
+            button.selected = YES;
+            [self.selectedButtons addObject:button];
         }
     }
-    
-    for (UIButton *button in self.selectedButtons) {
-        button.selected = NO;
-    }
-    [self.selectedButtons removeAllObjects];
-    self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
     [self setNeedsDisplay];
 }
 
@@ -229,10 +257,10 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
 - (void)setNormalGestureNodeImage:(UIImage *)normalGestureNodeImage{
     if (_normalGestureNodeImage != normalGestureNodeImage) {
         _normalGestureNodeImage = normalGestureNodeImage;
-        CGSize buttonSize = self.buttonSize;
-        buttonSize.width = self.buttonSize.width > normalGestureNodeImage.size.width ? self.buttonSize.width : normalGestureNodeImage.size.width;
-        buttonSize.height = self.buttonSize.height > normalGestureNodeImage.size.height ? self.buttonSize.height : normalGestureNodeImage.size.height;
-        self.buttonSize = buttonSize;
+        CGSize nodeSize = self.nodeSize;
+        nodeSize.width = self.nodeSize.width > normalGestureNodeImage.size.width ? self.nodeSize.width : normalGestureNodeImage.size.width;
+        nodeSize.height = self.nodeSize.height > normalGestureNodeImage.size.height ? self.nodeSize.height : normalGestureNodeImage.size.height;
+        self.nodeSize = nodeSize;
         
         if (self.buttons != nil && [self.buttons count] > 0) {
             for (UIButton *button in self.buttons) {
@@ -246,10 +274,10 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     if (_selectedGestureNodeImage != selectedGestureNodeImage) {
         _selectedGestureNodeImage = selectedGestureNodeImage;
         
-        CGSize buttonSize = self.buttonSize;
-        buttonSize.width = self.buttonSize.width > selectedGestureNodeImage.size.width ? self.buttonSize.width : selectedGestureNodeImage.size.width;
-        buttonSize.height = self.buttonSize.height > selectedGestureNodeImage.size.height ? self.buttonSize.height : selectedGestureNodeImage.size.height;
-        self.buttonSize = buttonSize;
+        CGSize nodeSize = self.nodeSize;
+        nodeSize.width = self.nodeSize.width > selectedGestureNodeImage.size.width ? self.nodeSize.width : selectedGestureNodeImage.size.width;
+        nodeSize.height = self.nodeSize.height > selectedGestureNodeImage.size.height ? self.nodeSize.height : selectedGestureNodeImage.size.height;
+        self.nodeSize = nodeSize;
         
         if (self.buttons != nil && [self.buttons count] > 0) {
             for (UIButton *button in self.buttons) {
@@ -264,7 +292,7 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     
     _delegateFlags.didBeginWithPasscode = [delegate respondsToSelector:@selector(gestureLockView:didBeginWithPasscode:)];
     _delegateFlags.didEndWithPasscode = [delegate respondsToSelector:@selector(gestureLockView:didEndWithPasscode:)];
-    _delegateFlags.didCanceled = [delegate respondsToSelector:@selector(gestureLockViewCanceled:)];
+    _delegateFlags.didCanceled = [delegate respondsToSelector:@selector(gestureLockView:didCanceledWithPasscode:)];
 }
 
 - (void)setNumberOfGestureNodes:(NSUInteger)numberOfGestureNodes{
@@ -282,7 +310,7 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag = i;
             button.userInteractionEnabled = NO;
-            button.frame = CGRectMake(0, 0, self.buttonSize.width, self.buttonSize.height);
+            button.frame = CGRectMake(0, 0, self.nodeSize.width, self.nodeSize.height);
             button.backgroundColor = [UIColor clearColor];
             if (self.normalGestureNodeImage != nil) {
                 [button setImage:self.normalGestureNodeImage forState:UIControlStateNormal];
