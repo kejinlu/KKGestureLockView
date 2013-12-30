@@ -73,9 +73,9 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     self.contentView = [[UIView alloc] initWithFrame:UIEdgeInsetsInsetRect(self.bounds, self.contentInsets)];
     self.contentView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.contentView];
-    
+
     self.buttonSize = CGSizeMake(kNodeDefaultWidth, kNodeDefaultHeight);
-    
+
     self.normalGestureNodeImage = [self imageWithColor:[UIColor greenColor] size:self.buttonSize];
     self.selectedGestureNodeImage = [self imageWithColor:[UIColor redColor] size:self.buttonSize];
     
@@ -85,8 +85,17 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     self.selectedButtons = [NSMutableArray array];
     
     self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
+    self.autoResetSelectionState = YES;
 }
 
+- (NSString *)generatePassCode
+{
+    NSMutableArray *passCodeArray = [NSMutableArray array];
+    for (UIButton *button in self.selectedButtons) {
+        [passCodeArray addObject:[@(button.tag) stringValue]];
+    }
+    return [passCodeArray componentsJoinedByString:@","];
+}
 
 #pragma mark -
 #pragma mark UIView Overrides
@@ -185,42 +194,60 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
 - (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event{    
     if ([self.selectedButtons count] > 0) {
         if (_delegateFlags.didEndWithPasscode) {
-            NSMutableArray *passcodeArray = [NSMutableArray array];
-            for (UIButton *button in self.selectedButtons) {
-                [passcodeArray addObject:[NSString stringWithFormat:@"%d",button.tag]];
-            }
-            
-            [self.delegate gestureLockView:self didEndWithPasscode:[passcodeArray componentsJoinedByString:@","]];
+            [self.delegate gestureLockView:self didEndWithPasscode:[self generatePassCode]];
         }
     }
-    
+
+    if (self.autoResetSelectionState) {
+        [self resetSelectionState];
+    }
+}
+
+- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
+    if ([self.selectedButtons count] > 0) {
+        if (_delegateFlags.didCanceled) {
+            [self.delegate gestureLockView:self didCanceledWithPasscode:[self generatePassCode]];
+        }
+    }
+
+    if (self.autoResetSelectionState) {
+        [self resetSelectionState];
+    }
+}
+
+#pragma pulic methods
+- (void)resetSelectionState
+{
     for (UIButton *button in self.selectedButtons) {
         button.selected = NO;
     }
     [self.selectedButtons removeAllObjects];
     self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
     [self setNeedsDisplay];
-    
-
 }
 
-- (void)touchesCancelled:(NSSet *)touches withEvent:(UIEvent *)event{
-    if ([self.selectedButtons count] > 0) {
-        if (_delegateFlags.didCanceled) {
-            NSMutableArray *passcodeArray = [NSMutableArray array];
-            for (UIButton *button in self.selectedButtons) {
-                [passcodeArray addObject:[NSString stringWithFormat:@"%d",button.tag]];
-            }
-            
-            [self.delegate gestureLockView:self didCanceledWithPasscode:[passcodeArray componentsJoinedByString:@","]];
+- (void)redrawOnlySelectionWithLineColor:(UIColor *)lineColor selectedImage:(UIImage *)selectedImage
+{
+    self.lineColor = lineColor;
+    self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
+    [self setSelectedGestureNodeImage:selectedImage];
+    [self setNeedsDisplay];
+}
+
+- (void)drawSelectionWithPassCode:(NSString *)passCode
+{
+    NSArray *passCodeArray = [passCode componentsSeparatedByString:@","];
+    if (passCodeArray.count <= 0) return;
+    //clean state first
+    [self resetSelectionState];
+    for (NSString *passCodeUnit in passCodeArray) {
+        NSInteger buttonTag = [passCodeUnit integerValue];
+        if (buttonTag >= 0 && buttonTag < self.buttons.count) {
+            UIButton *button = self.buttons[buttonTag];
+            button.selected = YES;
+            [self.selectedButtons addObject:button];
         }
     }
-    
-    for (UIButton *button in self.selectedButtons) {
-        button.selected = NO;
-    }
-    [self.selectedButtons removeAllObjects];
-    self.trackedLocationInContentView = CGPointMake(kTrackedLocationInvalidInContentView, kTrackedLocationInvalidInContentView);
     [self setNeedsDisplay];
 }
 
@@ -264,7 +291,7 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     
     _delegateFlags.didBeginWithPasscode = [delegate respondsToSelector:@selector(gestureLockView:didBeginWithPasscode:)];
     _delegateFlags.didEndWithPasscode = [delegate respondsToSelector:@selector(gestureLockView:didEndWithPasscode:)];
-    _delegateFlags.didCanceled = [delegate respondsToSelector:@selector(gestureLockViewCanceled:)];
+    _delegateFlags.didCanceled = [delegate respondsToSelector:@selector(gestureLockView:didCanceledWithPasscode:)];
 }
 
 - (void)setNumberOfGestureNodes:(NSUInteger)numberOfGestureNodes{

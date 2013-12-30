@@ -17,6 +17,8 @@
 - (void)gestureLockView:(KKGestureLockView *)gestureLockView didEndWithPasscode:(NSString *)passcode;
 
 - (void)gestureLockView:(KKGestureLockView *)gestureLockView didCanceledWithPasscode:(NSString *)passcode;
+
+
 @end
 
 @interface KKGestureLockView : UIView
@@ -32,7 +34,22 @@
 
 @property (nonatomic, strong, readonly) UIView *contentView;//the container of the gesture notes
 @property (nonatomic, assign) UIEdgeInsets contentInsets;
+//autoResetSelectionState desides whether to reset the selection state to origin.
+@property (nonatomic, assign) BOOL autoResetSelectionState; //default is YES
 
 @property (nonatomic, weak) id<KKGestureLockViewDelegate> delegate;
 
+
+- (void)resetSelectionState;
+/*
+ Important: redrawOnlySelectionWithLineColor has side-effect that it will modify 
+ the lineColor and selectedImage, so you should reset gestureLockView's
+ lineColor and selectedImage to original one manually.
+ */
+- (void)redrawOnlySelectionWithLineColor:(UIColor *)lineColor selectedImage:(UIImage *)selectedImage;
+
+/* 
+ drawSelectionWithPassCode helps to draw passcode on gestureLockView, e.g. thumbnailGestureLockView(手势密码的缩略图)
+ */
+- (void)drawSelectionWithPassCode:(NSString *)passCode;
 @end
