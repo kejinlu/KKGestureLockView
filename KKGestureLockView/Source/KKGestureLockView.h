@@ -31,7 +31,6 @@
 
 @property (nonatomic, strong) UIColor *lineColor;
 @property (nonatomic, assign) CGFloat lineWidth;
-@property (nonatomic, assign) CGSize nodeSize;
 
 @property (nonatomic, strong, readonly) UIView *contentView;//the container of the gesture notes
 @property (nonatomic, assign) UIEdgeInsets contentInsets;

@@ -27,6 +27,7 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
 @property (nonatomic, strong) UIView *contentView;
 
 //Implement nodes with buttons
+@property (nonatomic, assign) CGSize buttonSize;
 @property (nonatomic, strong) NSArray *buttons;
 @property (nonatomic, strong) NSMutableArray *selectedButtons;
 
@@ -73,12 +74,10 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     self.contentView.backgroundColor = [UIColor clearColor];
     [self addSubview:self.contentView];
 
-    if (CGSizeEqualToSize(self.nodeSize, CGSizeZero)) {
-        self.nodeSize = CGSizeMake(kNodeDefaultWidth, kNodeDefaultHeight);
-    }
+    self.buttonSize = CGSizeMake(kNodeDefaultWidth, kNodeDefaultHeight);
 
-    self.normalGestureNodeImage = [self imageWithColor:[UIColor greenColor] size:self.nodeSize];
-    self.selectedGestureNodeImage = [self imageWithColor:[UIColor redColor] size:self.nodeSize];
+    self.normalGestureNodeImage = [self imageWithColor:[UIColor greenColor] size:self.buttonSize];
+    self.selectedGestureNodeImage = [self imageWithColor:[UIColor redColor] size:self.buttonSize];
     
     self.numberOfGestureNodes = kNumberOfNodes;
     self.gestureNodesPerRow = kNodesPerRow;
@@ -120,15 +119,15 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     [super layoutSubviews];
     
     self.contentView.frame = UIEdgeInsetsInsetRect(self.bounds, self.contentInsets);
-    CGFloat horizontalNodeMargin = (self.contentView.bounds.size.width - self.nodeSize.width * self.gestureNodesPerRow)/(self.gestureNodesPerRow - 1);
+    CGFloat horizontalNodeMargin = (self.contentView.bounds.size.width - self.buttonSize.width * self.gestureNodesPerRow)/(self.gestureNodesPerRow - 1);
     NSUInteger numberOfRows = ceilf((self.numberOfGestureNodes * 1.0 / self.gestureNodesPerRow));
-    CGFloat verticalNodeMargin = (self.contentView.bounds.size.height - self.nodeSize.height *numberOfRows)/(numberOfRows - 1);
+    CGFloat verticalNodeMargin = (self.contentView.bounds.size.height - self.buttonSize.height *numberOfRows)/(numberOfRows - 1);
     
     for (int i = 0; i < self.numberOfGestureNodes ; i++) {
         int row = i / self.gestureNodesPerRow;
         int column = i % self.gestureNodesPerRow;
         UIButton *button = [self.buttons objectAtIndex:i];
-        button.frame = CGRectMake(floorf((self.nodeSize.width + horizontalNodeMargin) * column), floorf((self.nodeSize.height + verticalNodeMargin) * row), self.nodeSize.width, self.nodeSize.height);
+        button.frame = CGRectMake(floorf((self.buttonSize.width + horizontalNodeMargin) * column), floorf((self.buttonSize.height + verticalNodeMargin) * row), self.buttonSize.width, self.buttonSize.height);
     }
 }
 
@@ -257,10 +256,10 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
 - (void)setNormalGestureNodeImage:(UIImage *)normalGestureNodeImage{
     if (_normalGestureNodeImage != normalGestureNodeImage) {
         _normalGestureNodeImage = normalGestureNodeImage;
-        CGSize nodeSize = self.nodeSize;
-        nodeSize.width = self.nodeSize.width > normalGestureNodeImage.size.width ? self.nodeSize.width : normalGestureNodeImage.size.width;
-        nodeSize.height = self.nodeSize.height > normalGestureNodeImage.size.height ? self.nodeSize.height : normalGestureNodeImage.size.height;
-        self.nodeSize = nodeSize;
+        CGSize buttonSize = self.buttonSize;
+        buttonSize.width = self.buttonSize.width > normalGestureNodeImage.size.width ? self.buttonSize.width : normalGestureNodeImage.size.width;
+        buttonSize.height = self.buttonSize.height > normalGestureNodeImage.size.height ? self.buttonSize.height : normalGestureNodeImage.size.height;
+        self.buttonSize = buttonSize;
         
         if (self.buttons != nil && [self.buttons count] > 0) {
             for (UIButton *button in self.buttons) {
@@ -274,10 +273,10 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     if (_selectedGestureNodeImage != selectedGestureNodeImage) {
         _selectedGestureNodeImage = selectedGestureNodeImage;
         
-        CGSize nodeSize = self.nodeSize;
-        nodeSize.width = self.nodeSize.width > selectedGestureNodeImage.size.width ? self.nodeSize.width : selectedGestureNodeImage.size.width;
-        nodeSize.height = self.nodeSize.height > selectedGestureNodeImage.size.height ? self.nodeSize.height : selectedGestureNodeImage.size.height;
-        self.nodeSize = nodeSize;
+        CGSize buttonSize = self.buttonSize;
+        buttonSize.width = self.buttonSize.width > selectedGestureNodeImage.size.width ? self.buttonSize.width : selectedGestureNodeImage.size.width;
+        buttonSize.height = self.buttonSize.height > selectedGestureNodeImage.size.height ? self.buttonSize.height : selectedGestureNodeImage.size.height;
+        self.buttonSize = buttonSize;
         
         if (self.buttons != nil && [self.buttons count] > 0) {
             for (UIButton *button in self.buttons) {
@@ -310,7 +309,7 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
             UIButton *button = [UIButton buttonWithType:UIButtonTypeCustom];
             button.tag = i;
             button.userInteractionEnabled = NO;
-            button.frame = CGRectMake(0, 0, self.nodeSize.width, self.nodeSize.height);
+            button.frame = CGRectMake(0, 0, self.buttonSize.width, self.buttonSize.height);
             button.backgroundColor = [UIColor clearColor];
             if (self.normalGestureNodeImage != nil) {
                 [button setImage:self.normalGestureNodeImage forState:UIControlStateNormal];
