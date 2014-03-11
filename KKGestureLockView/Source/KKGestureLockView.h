@@ -21,6 +21,9 @@
 
 @interface KKGestureLockView : UIView
 
+@property (nonatomic, strong, readonly) NSArray *buttons;
+@property (nonatomic, strong, readonly) NSMutableArray *selectedButtons;
+
 @property (nonatomic, assign) NSUInteger numberOfGestureNodes;
 @property (nonatomic, assign) NSUInteger gestureNodesPerRow;
 

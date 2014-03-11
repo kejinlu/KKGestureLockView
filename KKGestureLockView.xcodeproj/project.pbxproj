@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A338823818CE1D2400CEF8D1 /* KKGestureLockPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = A338823718CE1D2400CEF8D1 /* KKGestureLockPreviewView.m */; };
 		A399B43D17AED01800ADF304 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A399B43C17AED01800ADF304 /* UIKit.framework */; };
 		A399B43F17AED01800ADF304 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A399B43E17AED01800ADF304 /* Foundation.framework */; };
 		A399B44117AED01800ADF304 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A399B44017AED01800ADF304 /* CoreGraphics.framework */; };
@@ -27,6 +28,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A338823618CE1D2400CEF8D1 /* KKGestureLockPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KKGestureLockPreviewView.h; sourceTree = "<group>"; };
+		A338823718CE1D2400CEF8D1 /* KKGestureLockPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KKGestureLockPreviewView.m; sourceTree = "<group>"; };
 		A399B43917AED01800ADF304 /* KKGestureLockView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KKGestureLockView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A399B43C17AED01800ADF304 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		A399B43E17AED01800ADF304 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -131,6 +134,8 @@
 			children = (
 				A399B46E17AF997100ADF304 /* KKGestureLockView.h */,
 				A399B46F17AF997100ADF304 /* KKGestureLockView.m */,
+				A338823618CE1D2400CEF8D1 /* KKGestureLockPreviewView.h */,
+				A338823718CE1D2400CEF8D1 /* KKGestureLockPreviewView.m */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -209,6 +214,7 @@
 			files = (
 				A399B44917AED01800ADF304 /* main.m in Sources */,
 				A399B44D17AED01800ADF304 /* KKAppDelegate.m in Sources */,
+				A338823818CE1D2400CEF8D1 /* KKGestureLockPreviewView.m in Sources */,
 				A399B45617AED01800ADF304 /* KKViewController.m in Sources */,
 				A399B47017AF997100ADF304 /* KKGestureLockView.m in Sources */,
 			);
@@ -333,6 +339,7 @@
 				A399B45E17AED01800ADF304 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
