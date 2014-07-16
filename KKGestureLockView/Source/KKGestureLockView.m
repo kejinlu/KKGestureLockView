@@ -264,7 +264,7 @@ const static CGFloat kTrackedLocationInvalidInContentView = -1.0;
     
     _delegateFlags.didBeginWithPasscode = [delegate respondsToSelector:@selector(gestureLockView:didBeginWithPasscode:)];
     _delegateFlags.didEndWithPasscode = [delegate respondsToSelector:@selector(gestureLockView:didEndWithPasscode:)];
-    _delegateFlags.didCanceled = [delegate respondsToSelector:@selector(gestureLockViewCanceled:)];
+    _delegateFlags.didCanceled = [delegate respondsToSelector:@selector(gestureLockView:didCanceledWithPasscode:)];
 }
 
 - (void)setNumberOfGestureNodes:(NSUInteger)numberOfGestureNodes{
